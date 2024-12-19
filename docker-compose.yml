@@ -1,0 +1,26 @@
+version: '3'
+services:
+  notify-send:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./:/app
+    depends_on:
+      - db_postgres
+
+  db_postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: notify_db
+    ports:
+      - 5433:5432 # cambia el puerto en caso de que el 5432 este ocupado
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
