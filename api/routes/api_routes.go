@@ -15,6 +15,7 @@ func SeptupRoutes(router *gin.Engine) {
 		contentGroup := authGroup.Group("/content")
 		{
 			contentGroup.GET("/list_countries", authHandlers.ListCountriesHandler)
+			contentGroup.POST("/get_timezone", authHandlers.GetTimezoneByCountryId)
 		}
 	}
 

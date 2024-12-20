@@ -31,3 +31,22 @@ func ListCountries() ([]types.Country, error) {
 
 	return countries, nil
 }
+
+func GestTimezoneByCountryId(countryId int) (types.TimeZone, error) {
+    client, err := database.GetDBConnection()
+    if err != nil {
+        return types.TimeZone{}, err
+    }
+    defer client.Close()
+
+    row := client.QueryRow("SELECT id, name FROM timezones WHERE country_id = $1", countryId)
+
+    var timeZone types.TimeZone
+    err = row.Scan(&timeZone.Id, &timeZone.TimeZone)
+    if err != nil {
+        debug.LogError(err)
+        return types.TimeZone{}, err
+    }
+
+    return timeZone, nil
+}

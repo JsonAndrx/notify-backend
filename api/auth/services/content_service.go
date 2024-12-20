@@ -13,3 +13,12 @@ func ListCountriesService() ([]types.Country, error) {
 
 	return countries, nil
 }
+
+func GetTimeZoneService(countryType types.GetTimezoneByCountryIdRequest) (types.TimeZone, error) {
+	timeZones, err := repositories.GestTimezoneByCountryId(countryType.CountryId)
+	if err != nil {
+		return types.TimeZone{}, err
+	}
+
+	return timeZones, nil
+}
