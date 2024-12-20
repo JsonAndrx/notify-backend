@@ -1,9 +1,7 @@
 package response
 
 import (
-	"fmt"
 	"notify-backend/api/utils/types"
-	"notify-backend/config"
 )
 
 func SuccessResponse(message string, data interface{}) types.Success {
@@ -13,16 +11,13 @@ func SuccessResponse(message string, data interface{}) types.Success {
 	return types.Success{
 		Status:  true,
 		Data:    data,
-		Error:   nil,
+		Message: message,
 	}
 }
 
 func ErrorResponse(message string, error interface{}) types.Error {
 	if message == "" {
 		message = "Error"
-	} else {
-		messageCode := config.GetCodeError(message)
-		message = fmt.Sprintf("%s. %s", message, messageCode)
 	}
 	return types.Error{
 		Status: false,

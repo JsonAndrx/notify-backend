@@ -3,7 +3,7 @@ package types
 type Success struct {
 	Status bool        `json:"status"`
 	Data   interface{} `json:"data"`
-	Error  interface{} `json:"error"`
+	Message  interface{} `json:"message"`
 }
 
 type Error struct {
