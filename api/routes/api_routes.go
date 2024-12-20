@@ -11,5 +11,12 @@ func SeptupRoutes(router *gin.Engine) {
 	authGroup := routePrefix.Group("/auth")
 	{
 		authGroup.POST("/login", authHandlers.LoginHandler)
+		
+		contentGroup := authGroup.Group("/content")
+		{
+			contentGroup.GET("/list_countries", authHandlers.ListCountriesHandler)
+		}
 	}
+
+
 }

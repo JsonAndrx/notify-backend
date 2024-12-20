@@ -1,4 +1,4 @@
-package config
+package database
 
 import (
 	"database/sql"
@@ -14,8 +14,10 @@ func GetDBConnection() (*sql.DB, error) {
 		os.Getenv("DB_HOST"),
 		os.Getenv("DB_PORT"),
 		os.Getenv("DB_USER"),
-		os.Getenv("DB_PASSWORD"),
+		os.Getenv("DB_PASS"),
 		os.Getenv("DB_NAME"))
+
+	fmt.Println(connStr);
 
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {

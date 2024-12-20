@@ -7,9 +7,16 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/rs/zerolog/log"
+	"github.com/joho/godotenv"
+	"notify-backend/api/utils/debug"
 )
 
 func main() {
+	err := godotenv.Load()
+	if err != nil {
+		debug.LogError(err)
+	}
+
 	log.Info().Msg("Starting server")
 	r := gin.Default()
 	routes.SeptupRoutes(r)
