@@ -12,7 +12,7 @@ func ListCountries() ([]types.Country, error) {
 		return nil, err
 	}
 
-	rows, err := client.Query("SELECT id, name FROM countries")
+	rows, err := client.Query("SELECT id, name, iso_code FROM countries")
 	if err != nil {
 		debug.LogError(err)
 		return nil, err
@@ -21,7 +21,7 @@ func ListCountries() ([]types.Country, error) {
 	var countries []types.Country
 	for rows.Next() {
 		var country types.Country
-		err = rows.Scan(&country.Id, &country.CountryName)
+		err = rows.Scan(&country.Id, &country.CountryName, &country.CountryCode)
 		if err != nil {
 			debug.LogError(err)
 			return nil, err
