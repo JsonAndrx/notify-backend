@@ -15,12 +15,13 @@ func SuccessResponse(message string, data interface{}) types.Success {
 	}
 }
 
-func ErrorResponse(message string, error interface{}) types.Error {
+func ErrorResponse(message string, errorRes interface{}) types.Error {
 	if message == "" {
 		message = "Error"
 	}
 	return types.Error{
 		Status: false,
-		Error:  message,
+		Error:  errorRes,
+		Message: message,
 	}
 }
