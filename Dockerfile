@@ -1,18 +1,12 @@
-FROM golang:1.22.6-alpine3.19
-
-COPY go.mod go.sum ./
-RUN go mod download
-
-COPY . .
-
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main cmd/main.go
+FROM golang:1.22.6-alpine3.19 AS builder
 
 WORKDIR /app
-
+COPY go.mod go.sum ./
+RUN go mod download
 COPY . .
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main cmd/main.go
 
-RUN go get github.com/githubnemo/CompileDaemon
-
-RUN go install github.com/githubnemo/CompileDaemon
-
-ENTRYPOINT CompileDaemon --build="go build -o /tmp/main ./cmd/main.go" --command="/tmp/main"
+FROM alpine:3.19
+COPY --from=builder /app/main /main
+WORKDIR /
+ENTRYPOINT ["/main"]
