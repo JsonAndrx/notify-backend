@@ -13,7 +13,6 @@ func RegisterRepository(registerRequest types.RegisterRequest) error {
 		debug.LogError(err)
 		return err
 	}
-	defer client.Close()
 
 	// Iniciar una transacción
 	tx, err := client.Begin()
@@ -64,7 +63,6 @@ func ValidateEmailUser(email string) (bool, error) {
 		debug.LogError(err)
 		return false, err
 	}
-	defer client.Close()
 
 	query := "SELECT email FROM users WHERE email = $1"
 	row := client.QueryRow(query, email)
@@ -88,7 +86,6 @@ func ValidateUsernameUser(username string) (bool, error) {
 		debug.LogError(err)
 		return false, err
 	}
-	defer client.Close()
 
 	query := "SELECT username FROM users WHERE username = $1"
 	row := client.QueryRow(query, username)
@@ -115,7 +112,6 @@ func ValidateNameCompany(name string) (bool, error) {
 		debug.LogError(err)
 		return false, err
 	}
-	defer client.Close()
 
 	query := "SELECT name FROM companies WHERE name = $1"
 	row := client.QueryRow(query, name)
@@ -142,7 +138,6 @@ func ValidatePhoneCompany(phone string) (bool, error) {
 		debug.LogError(err)
 		return false, err
 	}
-	defer client.Close()
 
 	query := "SELECT phone FROM companies WHERE phone = $1"
 	row := client.QueryRow(query, phone)

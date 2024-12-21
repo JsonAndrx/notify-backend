@@ -37,7 +37,6 @@ func GestTimezoneByCountryId(countryId int) (types.TimeZone, error) {
     if err != nil {
         return types.TimeZone{}, err
     }
-    defer client.Close()
 
     row := client.QueryRow("SELECT id, name FROM timezones WHERE country_id = $1", countryId)
 

@@ -1,4 +1,4 @@
-FROM golang:1.22.6-bullseye
+FROM golang:1.22.6-alpine3.19
 
 COPY go.mod go.sum ./
 RUN go mod download

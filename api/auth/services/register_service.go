@@ -14,7 +14,7 @@ func RegisterService(registerRequest types.RegisterRequest) (bool, string, error
 		return false, "", err
 	}
 	if EmailUserValid {
-		return false, "Email already exists", nil
+		return false, "El correo ya existe", nil
 	}
 
 	UsernameUserValid, err := repositories.ValidateUsernameUser(registerRequest.User.Username)
@@ -22,7 +22,7 @@ func RegisterService(registerRequest types.RegisterRequest) (bool, string, error
 		return false, "", err
 	}
 	if UsernameUserValid {
-		return false, "Username already exists", nil
+		return false, "El usuario ya existe", nil
 	}
 
 	NameComapnyValid, err := repositories.ValidateNameCompany(registerRequest.Company.Name)
@@ -30,7 +30,7 @@ func RegisterService(registerRequest types.RegisterRequest) (bool, string, error
 		return false, "", err
 	}
 	if NameComapnyValid {
-		return false, "Company name already exists", nil
+		return false, "Ya existe una compañia con ese nombre", nil
 	}
 
 	PhoneCompanyValid, err := repositories.ValidatePhoneCompany(registerRequest.Company.Phone)
@@ -38,7 +38,7 @@ func RegisterService(registerRequest types.RegisterRequest) (bool, string, error
 		return false, "", err
 	}
 	if PhoneCompanyValid {
-		return false, "Phone company already exists", nil
+		return false, "Una compañia ya tiene asociado ese Telefono", nil
 	}
 
 	// Hash password
