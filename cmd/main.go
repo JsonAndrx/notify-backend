@@ -5,6 +5,7 @@ import (
 	response "notify-backend/api/utils/response"
 	"notify-backend/api/routes"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/rs/zerolog/log"
 	"github.com/joho/godotenv"
@@ -19,6 +20,14 @@ func main() {
 
 	log.Info().Msg("Starting server")
 	r := gin.Default()
+	
+	r.Use(cors.New(cors.Config{
+		AllowAllOrigins:  true,
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+	}))
 	routes.SeptupRoutes(r)
 
 	server := &http.Server{
