@@ -15,6 +15,7 @@ func SeptupRoutes(router *gin.Engine) {
 		authGroup.POST("/login", authHandlers.LoginHandler)
 		authGroup.POST("/register", authHandlers.RegisterHandler)
 		authGroup.POST("/logout", authHandlers.LogoutHandler)
+		authGroup.GET("/verify-session", authHandlers.VerifySessionHandler)
 
 		contentGroup := authGroup.Group("/content")
 		{
