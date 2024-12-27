@@ -27,6 +27,8 @@ func LogoutHandler(c *gin.Context) {
         Value:    "",
         Expires:  time.Now().Add(-1 * time.Hour),
         HttpOnly: true,
+        SameSite: http.SameSiteNoneMode,
+        Secure:   true,
     })
 
     c.JSON(http.StatusOK, apiResponse.SuccessResponse("Logout successful", nil))

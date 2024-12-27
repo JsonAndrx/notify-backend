@@ -35,6 +35,7 @@ func LoginService(loginRequest types.LoginRequest, w http.ResponseWriter) (bool,
         Name:     "token",
         Value:    token,
         Expires:  expirationTime,
+        SameSite: http.SameSiteNoneMode,
         HttpOnly: true,
     })
 
