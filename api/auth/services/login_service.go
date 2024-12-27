@@ -37,6 +37,7 @@ func LoginService(loginRequest types.LoginRequest, w http.ResponseWriter) (bool,
         Expires:  expirationTime,
         SameSite: http.SameSiteNoneMode,
         HttpOnly: true,
+        Secure:  true,
     })
 
     return true, nil
