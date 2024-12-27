@@ -18,18 +18,15 @@ func LoginService(loginRequest types.LoginRequest, w http.ResponseWriter) (bool,
         return false, nil
     }
 
-
     err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(loginRequest.Password))
     if err != nil {
         return false, err
     }
 
-
     token, expirationTime, err := encrypt.GenerateToken(user.Username)
     if err != nil {
         return false, err
     }
-
 
     http.SetCookie(w, &http.Cookie{
         Name:     "token",
@@ -37,7 +34,7 @@ func LoginService(loginRequest types.LoginRequest, w http.ResponseWriter) (bool,
         Expires:  expirationTime,
         SameSite: http.SameSiteNoneMode,
         HttpOnly: true,
-        Secure:  true,
+        Secure:   true,
     })
 
     return true, nil

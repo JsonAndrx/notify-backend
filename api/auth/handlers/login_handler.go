@@ -22,10 +22,10 @@ func LoginHandler(c *gin.Context) {
         return
     }
 
-	if !validLogin {
-		c.JSON(http.StatusUnauthorized, apiResponse.ErrorResponse("Invalid username or password", nil))
-		return
-	}
+    if !validLogin {
+        c.JSON(http.StatusUnauthorized, apiResponse.ErrorResponse("Invalid username or password", nil))
+        return
+    }
 
     c.JSON(http.StatusOK, apiResponse.SuccessResponse("Login successful", nil))
 }
