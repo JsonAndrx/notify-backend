@@ -23,13 +23,16 @@ func main() {
 	log.Info().Msg("Starting server")
 	r := gin.Default()
 
-	r.Use(cors.New(cors.Config{
-		AllowAllOrigins:  true,
-		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
-		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
-		ExposeHeaders:    []string{"Content-Length"},
-		AllowCredentials: true,
-	}))
+    r.Use(cors.New(cors.Config{
+        AllowOrigins:     []string{"*"},
+        AllowOriginFunc: func(origin string) bool {
+            return true
+        },
+        AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+        AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
+        ExposeHeaders:    []string{"Content-Length"},
+        AllowCredentials: true,
+    }))
 	fmt.Println("paso los cors")
 	routes.SeptupRoutes(r)
 

@@ -1,14 +1,16 @@
 package handlers
 
 import (
-    "net/http"
-    "time"
-    apiResponse "notify-backend/api/utils/response"
-    "github.com/gin-gonic/gin"
+	"net/http"
+	apiResponse "notify-backend/api/utils/response"
+	"time"
+    "fmt"
+
+	"github.com/gin-gonic/gin"
 )
 
 func LogoutHandler(c *gin.Context) {
-    _, err := c.Request.Cookie("token")
+    cookie, err := c.Request.Cookie("token")
     if err != nil {
         if err == http.ErrNoCookie {
             c.JSON(http.StatusUnauthorized, apiResponse.ErrorResponse("No active session", nil))
@@ -18,6 +20,7 @@ func LogoutHandler(c *gin.Context) {
         return
     }
 
+    fmt.Println(cookie)
     // Si la cookie existe, eliminarla estableciendo una fecha de expiración en el pasado
     http.SetCookie(c.Writer, &http.Cookie{
         Name:     "token",
