@@ -24,7 +24,6 @@ func main() {
 	r := gin.Default()
 
     r.Use(cors.New(cors.Config{
-        AllowOrigins:     []string{"*"},
         AllowOriginFunc: func(origin string) bool {
             return true
         },
