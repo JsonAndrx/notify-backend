@@ -29,7 +29,7 @@ func LoginService(loginRequest types.LoginRequest, c *gin.Context) (bool, error)
         return false, err
     }
 
-    c.SetSameSite(http.SameSiteLaxMode)
+    c.SetSameSite(http.SameSiteNoneMode)
     c.SetCookie("token", token, 3600*24*30, "", "", false, true)
 
     return true, nil
