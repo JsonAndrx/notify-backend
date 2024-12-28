@@ -25,12 +25,12 @@ func main() {
 	r := gin.Default()
 
 	r.Use(cors.New(cors.Config{
-		AllowOrigins:    []string{"*"},
-		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE"},
-		AllowHeaders:     []string{"Content-Type", "access-control-allow-origin", "access-control-allow-headers"},
-		ExposeHeaders:    []string{"Set-Cookie"}, // Exponer encabezados específicos si es necesario
-		AllowCredentials: true, // Permite cookies y credenciales
-		MaxAge:       12 * time.Hour,
+		AllowOrigins:    []string{"*"},  // Permitir todos los orígenes
+		AllowMethods:    []string{"GET", "POST", "PUT", "DELETE"},
+		AllowHeaders:    []string{"Content-Type", "Access-Control-Allow-Origin", "Access-Control-Allow-Headers"},
+		ExposeHeaders:   []string{"Set-Cookie"},
+		AllowCredentials: true,  // Permitir cookies y credenciales
+		MaxAge:           12 * time.Hour,
 	}))
 
 	fmt.Println("paso los cors")
