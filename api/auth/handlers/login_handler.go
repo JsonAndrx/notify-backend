@@ -16,7 +16,7 @@ func LoginHandler(c *gin.Context) {
         return
     }
 
-    validLogin, err := authService.LoginService(loginRequest, c.Writer)
+    validLogin, err := authService.LoginService(loginRequest, c)
     if err != nil {
         c.JSON(http.StatusUnauthorized, apiResponse.ErrorResponse("Invalid username or password", err))
         return

@@ -6,9 +6,10 @@ import (
     "notify-backend/api/auth/types"
     "notify-backend/api/utils/encrypt"
     "golang.org/x/crypto/bcrypt"
+	"github.com/gin-gonic/gin"
 )
 
-func LoginService(loginRequest types.LoginRequest, w http.ResponseWriter) (bool, error) {
+func LoginService(loginRequest types.LoginRequest, c *gin.Context) (bool, error) {
     user, err := repositories.GetUserByUsernameOrEmail(loginRequest.Username)
     if err != nil {
         return false, err
@@ -23,20 +24,13 @@ func LoginService(loginRequest types.LoginRequest, w http.ResponseWriter) (bool,
         return false, err
     }
 
-    token, expirationTime, err := encrypt.GenerateToken(user.Username)
+    token, _, err := encrypt.GenerateToken(user.Username)
     if err != nil {
         return false, err
     }
 
-    http.SetCookie(w, &http.Cookie{
-        Name:     "token",
-        Value:    token,
-        Path:    "/",
-        Expires:  expirationTime,
-        SameSite: http.SameSiteNoneMode,
-        HttpOnly: true,
-        Secure:   true,
-    })
+    c.SetSameSite(http.SameSiteLaxMode)
+    c.SetCookie("token", token, 3600*24*30, "", "", false, true)
 
     return true, nil
 }
