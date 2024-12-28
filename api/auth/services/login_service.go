@@ -31,6 +31,7 @@ func LoginService(loginRequest types.LoginRequest, w http.ResponseWriter) (bool,
     http.SetCookie(w, &http.Cookie{
         Name:     "token",
         Value:    token,
+        Path:    "/",
         Expires:  expirationTime,
         SameSite: http.SameSiteNoneMode,
         HttpOnly: true,
