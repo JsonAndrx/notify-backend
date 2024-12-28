@@ -12,6 +12,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"github.com/rs/zerolog/log"
+	"time"
 )
 
 func main() {
@@ -24,15 +25,14 @@ func main() {
 	r := gin.Default()
 
 	r.Use(cors.New(cors.Config{
-		AllowOriginFunc: func(origin string) bool {
-			return true // Permite cualquier origen
-		},
-		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
-		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
+		AllowOrigins:    []string{"*"},
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE"},
+		AllowHeaders:     []string{"Content-Type", "access-control-allow-origin", "access-control-allow-headers"},
 		ExposeHeaders:    []string{"Set-Cookie"}, // Exponer encabezados específicos si es necesario
 		AllowCredentials: true, // Permite cookies y credenciales
+		MaxAge:       12 * time.Hour,
 	}))
-	
+
 	fmt.Println("paso los cors")
 	routes.SeptupRoutes(r)
 
