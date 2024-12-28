@@ -24,7 +24,7 @@ func main() {
 	r := gin.Default()
 
 	r.Use(cors.New(cors.Config{
-		AllowOrigins:    []string{"*"},  // Permitir todos los orígenes
+		AllowOrigins:    []string{"https://kzmfrrckt31g5z99926h.lite.vusercontent.net", "*"},  // Permitir todos los orígenes
 		AllowMethods:    []string{"GET", "POST", "PUT", "DELETE"},
 		AllowHeaders:    []string{"Content-Type", "Access-Control-Allow-Origin", "Access-Control-Allow-Headers"},
 		ExposeHeaders:    []string{"Content-Length"},
