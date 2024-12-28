@@ -12,7 +12,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"github.com/rs/zerolog/log"
-	"time"
 )
 
 func main() {
@@ -28,9 +27,8 @@ func main() {
 		AllowOrigins:    []string{"*"},  // Permitir todos los orígenes
 		AllowMethods:    []string{"GET", "POST", "PUT", "DELETE"},
 		AllowHeaders:    []string{"Content-Type", "Access-Control-Allow-Origin", "Access-Control-Allow-Headers"},
-		ExposeHeaders:   []string{"Set-Cookie"},
-		AllowCredentials: true,  // Permitir cookies y credenciales
-		MaxAge:           12 * time.Hour,
+		ExposeHeaders:    []string{"Content-Length"},
+        AllowCredentials: true,
 	}))
 
 	fmt.Println("paso los cors")
