@@ -3,7 +3,6 @@ package handlers
 import (
 	"net/http"
 	apiResponse "notify-backend/api/utils/response"
-	"time"
     "fmt"
 
 	"github.com/gin-gonic/gin"
