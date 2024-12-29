@@ -24,7 +24,9 @@ func main() {
 
     // Configurar CORS para permitir solicitudes desde dominios específicos
     r.Use(cors.New(cors.Config{
-        AllowOrigins:     []string{"*"}, // Cambia esto a los dominios permitidos
+		AllowOriginFunc: func(origin string) bool {
+            return true
+        },
         AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
         AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
         ExposeHeaders:    []string{"Content-Length"},
