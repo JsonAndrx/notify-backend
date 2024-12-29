@@ -22,14 +22,8 @@ func LogoutHandler(c *gin.Context) {
 
     fmt.Println(cookie)
     // Si la cookie existe, eliminarla estableciendo una fecha de expiración en el pasado
-    http.SetCookie(c.Writer, &http.Cookie{
-        Name:     "token",
-        Value:    "",
-        Expires:  time.Now().Add(-1 * time.Hour),
-        HttpOnly: true,
-        SameSite: http.SameSiteNoneMode,
-        Secure:   true,
-    })
+    c.SetSameSite(http.SameSiteNoneMode)
+    c.SetCookie("token", "", -1, "/", c.Request.Host, true, true)
 
     c.JSON(http.StatusOK, apiResponse.SuccessResponse("Logout successful", nil))
 }
